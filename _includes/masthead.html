@@ -1,0 +1,29 @@
+{% include base_path %}
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <a class="masthead__title{% if page.url == '/' or page.url == '/index.html' %} is-home{% endif %}" href="{{ base_path }}/">{{ site.title }}</a>
+
+    <input type="checkbox" id="nav-trigger" class="nav-trigger" aria-hidden="true" />
+    <label for="nav-trigger" class="nav-toggle" aria-label="Toggle navigation menu">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </label>
+
+    <nav class="site-nav" role="navigation" aria-label="Main">
+      <ul class="site-nav__links">
+        {% for link in site.data.navigation.main %}
+          {% if link.url contains 'http' %}
+            {% assign domain = '' %}
+          {% else %}
+            {% assign domain = base_path %}
+          {% endif %}
+          <li class="site-nav__item {% if page.url contains link.url and link.url != '/' %}is-active{% endif %}">
+            <a href="{{ domain }}{{ link.url }}">{{ link.title }}</a>
+          </li>
+        {% endfor %}
+        <li id="theme-toggle" class="site-nav__item site-nav__theme">
+          <a role="button" aria-labelledby="theme-icon"><i id="theme-icon" class="fa-solid fa-sun" aria-hidden="true" title="toggle theme"></i></a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
